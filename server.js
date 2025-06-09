@@ -77,7 +77,7 @@ app.post('/api/v1/auth/login', async (req, res) => {
     }
 
     const user = users.find(u => u.email === email);
-ECHO is off.
+
     if (!user) {
       return res.status(401).json({
         status: 'error',
@@ -86,7 +86,7 @@ ECHO is off.
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
-ECHO is off.
+
     if (!isValidPassword) {
       return res.status(401).json({
         status: 'error',
@@ -124,7 +124,7 @@ ECHO is off.
 // User profile endpoint
 app.get('/api/v1/users/me', (req, res) => {
   const authHeader = req.headers.authorization;
-ECHO is off.
+
   if (!authHeader) {
     return res.status(401).json({
       status: 'error',
@@ -135,7 +135,7 @@ ECHO is off.
   try {
     const token = authHeader.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret_key_at_least_32_characters_long');
-ECHO is off.
+
     const user = users.find(u => u.id === decoded.id);
     if (!user) {
       return res.status(404).json({
@@ -157,7 +157,7 @@ ECHO is off.
 // Doors endpoint
 app.get('/api/v1/doors', (req, res) => {
   const authHeader = req.headers.authorization;
-ECHO is off.
+
   if (!authHeader) {
     return res.status(401).json({
       status: 'error',
@@ -168,7 +168,7 @@ ECHO is off.
   try {
     const token = authHeader.split(' ')[1];
     jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret_key_at_least_32_characters_long');
-ECHO is off.
+
     // Return mock doors data
     res.json([
       {
