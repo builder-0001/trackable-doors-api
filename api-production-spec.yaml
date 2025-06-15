@@ -1,0 +1,29 @@
+name: trackable-doors-api-production
+region: sfo
+services:
+- dockerfile_path: Dockerfile
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xs
+  name: api
+  routes:
+  - path: /
+  source_dir: /
+  envs:
+  - key: NODE_ENV
+    scope: RUN_TIME
+    value: production
+  - key: PORT
+    scope: RUN_TIME
+    value: "8080"
+  - key: CORS_ORIGIN
+    scope: RUN_TIME
+    value: https://trackable-doors-platform-r5zf7.ondigitalocean.app
+  - key: JWT_SECRET
+    scope: RUN_TIME
+    value: production_jwt_secret_key_minimum_32_chars_long
+  - key: JWT_EXPIRES_IN
+    scope: RUN_TIME
+    value: 90d
+  health_check:
+    http_path: /health
